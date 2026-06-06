@@ -1,0 +1,112 @@
+[
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    {
+      "nazwa": "krol",
+      "kolor": "czarny",
+      "x": 2,
+      "y": 1,
+      "has_moved": true
+    },
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    {
+      "nazwa": "skoczek",
+      "kolor": "czarny",
+      "x": 3,
+      "y": 4,
+      "has_moved": true
+    },
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "nazwa": "wieza",
+      "kolor": "czarny",
+      "x": 7,
+      "y": 6,
+      "has_moved": true
+    }
+  ],
+  [
+    {
+      "nazwa": "wieza",
+      "kolor": "czarny",
+      "x": 0,
+      "y": 7,
+      "has_moved": true
+    },
+    null,
+    {
+      "nazwa": "krol",
+      "kolor": "bialy",
+      "x": 2,
+      "y": 7,
+      "has_moved": true
+    },
+    null,
+    null,
+    null,
+    null,
+    null
+  ]
+]
