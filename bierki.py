@@ -286,13 +286,13 @@ class Pion(Bierka):
                 nowy_y2 = self.y + kierunek * 2
                 if 0 <= nowy_y2 <= 7 and tablica[nowy_y2][self.x] is None:
                     ruchy.append((self.x, nowy_y2))
-        # bicie w lewo
-        if self.x - 1 >= 0 and tablica[nowy_y][self.x - 1] is not None:
-            if tablica[nowy_y][self.x - 1].kolor != self.kolor:
-                ruchy.append((self.x - 1, nowy_y))
+        # bicie w lewo i w prawo — tylko jeśli nowy_y jest w zakresie
+        if 0 <= nowy_y <= 7:
+            if self.x - 1 >= 0 and tablica[nowy_y][self.x - 1] is not None:
+                if tablica[nowy_y][self.x - 1].kolor != self.kolor:
+                    ruchy.append((self.x - 1, nowy_y))
 
-        # bicie w prawo
-        if self.x + 1 <= 7 and tablica[nowy_y][self.x + 1] is not None:
-            if tablica[nowy_y][self.x + 1].kolor != self.kolor:
-                ruchy.append((self.x + 1, nowy_y))
+            if self.x + 1 <= 7 and tablica[nowy_y][self.x + 1] is not None:
+                if tablica[nowy_y][self.x + 1].kolor != self.kolor:
+                    ruchy.append((self.x + 1, nowy_y))
         return ruchy

@@ -170,6 +170,9 @@ class InterfejsGraficzny:
                     self.wykonajRoszade(bierka, sx, sy, x, y)
                 bierka.x = x
                 bierka.y = y
+                if bierka.nazwa == 'pion' and (y == 0 or y == 7):
+                    bierka = Hetman(bierka.kolor, x, y)
+                    self.gra.tablica[y][x] = bierka
                 bierka.po_ruchu = True
             self.zaznaczone = None
             self.mozliwe_ruchy = []
@@ -337,14 +340,17 @@ class InterfejsGraficzny:
                     ataki.update(ruchy)
         return ataki
 
-    def koniec_gry(self, kolor):
+    def koniec_gry(self, kolor=None):
         self.game_over = True
         self.zwyciezca = kolor
 
     def rysujWygrana(self):
-        if self.game_over and self.zwyciezca:
+        if self.game_over:
             font = pygame.font.SysFont("arial", 50)
-            text = font.render(f"Koniec gry! {self.zwyciezca.capitalize()} wygrywa!", True, 'red')
+            if self.zwyciezca:
+                text = font.render(f"Koniec gry! {self.zwyciezca.capitalize()} wygrywa!", True, 'red')
+            else:
+                text = font.render("Koniec gry! Remis!", True, 'red')
             rect = text.get_rect(center=(450, 500))
             self.screen.blit(text, rect)
 
@@ -384,4 +390,16 @@ class InterfejsGraficzny:
                         if legal:
                             return False
         return True
+
+    def czyTylkoDwaKrole(self):
+        liczba_bierek = 0
+        liczba_kroli = 0
+        for y in range(8):
+            for x in range(8):
+                bierka = self.gra.tablica[y][x]
+                if bierka is not None:
+                    liczba_bierek += 1
+                    if bierka.nazwa == 'krol':
+                        liczba_kroli += 1
+        return liczba_bierek == 2 and liczba_kroli == 2
     

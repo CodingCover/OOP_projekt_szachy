@@ -1,154 +1,84 @@
 [
   [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     {
-      "nazwa": "wieza",
+      "nazwa": "krol",
       "kolor": "czarny",
-      "x": 0,
+      "x": 7,
       "y": 0,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "skoczek",
-      "kolor": "czarny",
-      "x": 1,
-      "y": 0,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "goniec",
-      "kolor": "czarny",
-      "x": 2,
-      "y": 0,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "hetman",
-      "kolor": "czarny",
-      "x": 3,
-      "y": 0,
-      "po_ruchu": false
-    },
+      "po_ruchu": true
+    }
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
     {
       "nazwa": "krol",
-      "kolor": "czarny",
-      "x": 4,
-      "y": 0,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "goniec",
-      "kolor": "czarny",
-      "x": 5,
-      "y": 0,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "skoczek",
-      "kolor": "czarny",
-      "x": 6,
-      "y": 0,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "wieza",
-      "kolor": "czarny",
-      "x": 7,
-      "y": 0,
-      "po_ruchu": false
-    }
-  ],
-  [
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 0,
-      "y": 1,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 1,
-      "y": 1,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 2,
-      "y": 1,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 3,
-      "y": 1,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 4,
-      "y": 1,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 5,
-      "y": 1,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 6,
-      "y": 1,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "czarny",
-      "x": 7,
-      "y": 1,
-      "po_ruchu": false
-    }
-  ],
-  [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null
-  ],
-  [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null
-  ],
-  [
-    null,
-    null,
-    null,
-    null,
-    {
-      "nazwa": "pion",
       "kolor": "bialy",
-      "x": 4,
-      "y": 4,
+      "x": 2,
+      "y": 5,
       "po_ruchu": true
     },
     null,
     null,
+    null,
+    null,
+    null
+  ],
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     null
   ],
   [
@@ -160,115 +90,5 @@
     null,
     null,
     null
-  ],
-  [
-    {
-      "nazwa": "pion",
-      "kolor": "bialy",
-      "x": 0,
-      "y": 6,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "bialy",
-      "x": 1,
-      "y": 6,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "bialy",
-      "x": 2,
-      "y": 6,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "bialy",
-      "x": 3,
-      "y": 6,
-      "po_ruchu": false
-    },
-    null,
-    {
-      "nazwa": "pion",
-      "kolor": "bialy",
-      "x": 5,
-      "y": 6,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "bialy",
-      "x": 6,
-      "y": 6,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "pion",
-      "kolor": "bialy",
-      "x": 7,
-      "y": 6,
-      "po_ruchu": false
-    }
-  ],
-  [
-    {
-      "nazwa": "wieza",
-      "kolor": "bialy",
-      "x": 0,
-      "y": 7,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "skoczek",
-      "kolor": "bialy",
-      "x": 1,
-      "y": 7,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "goniec",
-      "kolor": "bialy",
-      "x": 2,
-      "y": 7,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "hetman",
-      "kolor": "bialy",
-      "x": 3,
-      "y": 7,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "krol",
-      "kolor": "bialy",
-      "x": 4,
-      "y": 7,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "goniec",
-      "kolor": "bialy",
-      "x": 5,
-      "y": 7,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "skoczek",
-      "kolor": "bialy",
-      "x": 6,
-      "y": 7,
-      "po_ruchu": false
-    },
-    {
-      "nazwa": "wieza",
-      "kolor": "bialy",
-      "x": 7,
-      "y": 7,
-      "po_ruchu": false
-    }
   ]
 ]

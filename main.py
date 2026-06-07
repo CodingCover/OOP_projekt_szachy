@@ -60,7 +60,9 @@ while run:
     if moved:
         poprzedni_gracz = kolor
         kolor = 'czarny' if kolor == 'bialy' else 'bialy'
-        if interfejs.czySzachMat(kolor):
+        if interfejs.czyTylkoDwaKrole():
+            interfejs.koniec_gry(None)
+        elif interfejs.czySzachMat(kolor):
             interfejs.koniec_gry(poprzedni_gracz)
         moved = False
 
