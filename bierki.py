@@ -3,7 +3,7 @@ class Bierka:
             self.kolor = kolor
             self.x = x 
             self.y = y
-            self.has_moved = False
+            self.po_ruchu = False
 class Krol(Bierka):
     def __init__(self, kolor, x, y):
         super().__init__(kolor, x, y)

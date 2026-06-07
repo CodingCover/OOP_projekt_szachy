@@ -20,7 +20,7 @@ class Szachownica:
                         'kolor': bierka.kolor,
                         'x': bierka.x,
                         'y': bierka.y,
-                        'has_moved': getattr(bierka, 'has_moved', False),
+                        'po_ruchu': getattr(bierka, 'po_ruchu', getattr(bierka, 'has_moved', False)),
                     })
             dane.append(wiersz)
         return dane
@@ -62,7 +62,7 @@ class Szachownica:
                     continue
                 nazwa = entry['nazwa']
                 kolor = entry['kolor']
-                has_moved = entry.get('has_moved', False)
+                po_ruchu = entry.get('po_ruchu', entry.get('has_moved', False))
                 if nazwa == 'krol':
                     bierka = Krol(kolor, x, y)
                 elif nazwa == 'hetman':
@@ -78,5 +78,6 @@ class Szachownica:
                 else:
                     bierka = None
                 if bierka is not None:
-                    bierka.has_moved = has_moved
+                    bierka.po_ruchu = po_ruchu
+                    bierka.has_moved = po_ruchu
                 self.tablica[y][x] = bierka
