@@ -71,13 +71,13 @@ class InterfejsGraficzny:
         self.zaznaczone = None
         self.mozliwe_ruchy = []
         self.game_over = False
-        self.winner = None
+        self.zwyciezca = None
         self.reset_rect = pygame.Rect(650, 20, 200, 50)
-        self.undo_rect = pygame.Rect(650, 80, 200, 50)
+        self.undo_rect = pygame.Rect(400, 20, 200, 50)
         self.auto_save_file = 'szachownica_zapis.json'
-        self.score = {'bialy': 0, 'czarny': 0}
+        self.wynik = {'bialy': 0, 'czarny': 0}
         self.piece_values = {'pion': 1, 'skoczek': 3, 'goniec': 3, 'wieza': 5, 'hetman': 9, 'krol': 0}
-        self.state_history = [{'board': self.gra.generuj_stan(), 'player': 'bialy', 'score': self.score.copy()}]
+        self.state_history = [{'board': self.gra.generuj_stan(), 'player': 'bialy', 'score': self.wynik.copy()}]
         self.has_check_background = True
 
 
@@ -165,12 +165,12 @@ class InterfejsGraficzny:
             self.gra.tablica[y][x] = bierka
             if bierka is not None:
                 if cel is not None and cel.kolor != bierka.kolor:
-                    self.score[bierka.kolor] += self.piece_values.get(cel.nazwa, 0)
+                    self.wynik[bierka.kolor] += self.piece_values.get(cel.nazwa, 0)
                 if bierka.nazwa == 'krol' and abs(x - sx) == 2:
                     self.wykonajRoszade(bierka, sx, sy, x, y)
                 bierka.x = x
                 bierka.y = y
-                bierka.has_moved = True
+                bierka.po_ruchu = True
             self.zaznaczone = None
             self.mozliwe_ruchy = []
             self.zapiszStanAuto(player)
@@ -179,7 +179,7 @@ class InterfejsGraficzny:
 
     def podajMozliwosciRoszady(self, krol):
         ruchy = []
-        if krol.has_moved:
+        if krol.po_ruchu:
             return ruchy
 
         kolor = krol.kolor
@@ -188,53 +188,50 @@ class InterfejsGraficzny:
 
         przeciwnik = 'czarny' if kolor == 'bialy' else 'bialy'
         ataki_przeciwnika = self.polaAtakowane(przeciwnik)
-        rank = 7 if kolor == 'bialy' else 0
-        if (krol.x, krol.y) != (4, rank):
+        wiersz = 7 if kolor == 'bialy' else 0
+        if (krol.x, krol.y) != (4, wiersz):
             return ruchy
 
-        # roszada krótka
-        if self.czyRoszadaMozliwa(krol, 7, [(5, rank), (6, rank)], ataki_przeciwnika):
-            ruchy.append((6, rank))
+        if self.czyRoszadaMozliwa(krol, 7, [(5, wiersz), (6, wiersz)], ataki_przeciwnika):
+            ruchy.append((6, wiersz))
 
-        # roszada długa
-        if self.czyRoszadaMozliwa(krol, 0, [(1, rank), (2, rank), (3, rank)], ataki_przeciwnika):
-            ruchy.append((2, rank))
+        if self.czyRoszadaMozliwa(krol, 0, [(1, wiersz), (2, wiersz), (3, wiersz)], ataki_przeciwnika):
+            ruchy.append((2, wiersz))
 
         return ruchy
 
-    def czyRoszadaMozliwa(self, krol, rook_x, puste_pola, ataki_przeciwnika):
-        rank = krol.y
-        rook = self.gra.tablica[rank][rook_x]
-        if rook is None or rook.nazwa != 'wieza' or rook.kolor != krol.kolor or rook.has_moved:
+    def czyRoszadaMozliwa(self, krol, wieza_x, puste_pola, ataki_przeciwnika):
+        wiersz = krol.y
+        wieza = self.gra.tablica[wiersz][wieza_x]
+        if wieza is None or wieza.nazwa != 'wieza' or wieza.kolor != krol.kolor or wieza.po_ruchu:
             return False
         for x, y in puste_pola:
             if self.gra.tablica[y][x] is not None:
                 return False
-        # sprawdź czy pola przez które przechodzi król, oraz końcowe, są atakowane
-        przejscia = [(3, rank), (2, rank)] if rook_x == 0 else [(5, rank), (6, rank)]
+        przejscia = [(3, wiersz), (2, wiersz)] if wieza_x == 0 else [(5, wiersz), (6, wiersz)]
         for pole in przejscia:
             if pole in ataki_przeciwnika:
                 return False
         return True
 
     def wykonajRoszade(self, krol, sx, sy, dx, dy):
-        rank = sy
+        wiersz = sy
         if dx == 6:
-            rook = self.gra.tablica[rank][7]
-            self.gra.tablica[rank][7] = None
-            self.gra.tablica[rank][5] = rook
-            if rook is not None:
-                rook.x = 5
-                rook.y = rank
-                rook.has_moved = True
+            wieza = self.gra.tablica[wiersz][7]
+            self.gra.tablica[wiersz][7] = None
+            self.gra.tablica[wiersz][5] = wieza
+            if wieza is not None:
+                wieza.x = 5
+                wieza.y = wiersz
+                wieza.po_ruchu = True
         elif dx == 2:
-            rook = self.gra.tablica[rank][0]
-            self.gra.tablica[rank][0] = None
-            self.gra.tablica[rank][3] = rook
-            if rook is not None:
-                rook.x = 3
-                rook.y = rank
-                rook.has_moved = True
+            wieza = self.gra.tablica[wiersz][0]
+            self.gra.tablica[wiersz][0] = None
+            self.gra.tablica[wiersz][3] = wieza
+            if wieza is not None:
+                wieza.x = 3
+                wieza.y = wiersz
+                wieza.po_ruchu = True
 
     def symulujRuch(self, start, end):
         board = [row[:] for row in self.gra.tablica]
@@ -278,9 +275,9 @@ class InterfejsGraficzny:
         self.zaznaczone = None
         self.mozliwe_ruchy = []
         self.game_over = False
-        self.winner = None
-        self.score = {'bialy': 0, 'czarny': 0}
-        self.state_history = [{'board': self.gra.generuj_stan(), 'player': 'bialy', 'score': self.score.copy()}]
+        self.zwyciezca = None
+        self.wynik = {'bialy': 0, 'czarny': 0}
+        self.state_history = [{'board': self.gra.generuj_stan(), 'player': 'bialy', 'score': self.wynik.copy()}]
 
     def zapiszStan(self, sciezka='szachownica_zapis.json'):
         self.gra.zapisz_stan(sciezka)
@@ -290,7 +287,7 @@ class InterfejsGraficzny:
         with open(self.auto_save_file, 'w', encoding='utf-8') as plik:
             json.dump(dane, plik, ensure_ascii=False, indent=2)
         nastepny_gracz = 'czarny' if player == 'bialy' else 'bialy'
-        self.state_history.append({'board': dane, 'player': nastepny_gracz, 'score': self.score.copy()})
+        self.state_history.append({'board': dane, 'player': nastepny_gracz, 'score': self.wynik.copy()})
 
     def cofnijRuch(self):
         if len(self.state_history) <= 1:
@@ -298,19 +295,19 @@ class InterfejsGraficzny:
         self.state_history.pop()
         stan = self.state_history[-1]
         self.gra.wczytaj_stan(stan['board'])
-        self.score = stan.get('score', {'bialy': 0, 'czarny': 0})
+        self.wynik = stan.get('score', {'bialy': 0, 'czarny': 0})
         self.zaznaczone = None
         self.mozliwe_ruchy = []
         self.game_over = False
-        self.winner = None
+        self.zwyciezca = None
         return stan['player']
 
     def rysujPunkty(self):
         font = pygame.font.SysFont('arial', 24)
-        tekst_bialy = font.render(f'Biały: {self.score["bialy"]} pkt', True, 'white')
-        tekst_czarny = font.render(f' Czarny: {self.score["czarny"]} pkt', True, 'white')
-        self.screen.blit(tekst_bialy, (650, 150))
-        self.screen.blit(tekst_czarny, (650, 180))
+        tekst_bialy = font.render(f'Biały: {self.wynik["bialy"]} pkt', True, 'white')
+        tekst_czarny = font.render(f'Czarny: {self.wynik["czarny"]} pkt', True, 'white')
+        self.screen.blit(tekst_bialy, (100, 20))
+        self.screen.blit(tekst_czarny, (100, 50))
 
     def pozycjaKrola(self, kolor):
         for y in range(8):
@@ -342,12 +339,12 @@ class InterfejsGraficzny:
 
     def koniec_gry(self, kolor):
         self.game_over = True
-        self.winner = kolor
+        self.zwyciezca = kolor
 
     def rysujWygrana(self):
-        if self.game_over and self.winner:
+        if self.game_over and self.zwyciezca:
             font = pygame.font.SysFont("arial", 50)
-            text = font.render(f"Koniec gry! {self.winner.capitalize()} wygrywa!", True, 'red')
+            text = font.render(f"Koniec gry! {self.zwyciezca.capitalize()} wygrywa!", True, 'red')
             rect = text.get_rect(center=(450, 500))
             self.screen.blit(text, rect)
 
